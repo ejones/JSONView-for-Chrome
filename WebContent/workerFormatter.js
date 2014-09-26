@@ -50,6 +50,12 @@ function arrayToHTML(json) {
 }
 
 function objectToHTML(json) {
+    if (json.$oid) {
+      return 'ObjectId("' + json.$oid + '")';
+    } else if (json.$date) {
+      return 'ISODate("' + new Date(json.$date).toISOString() + '")'
+    }
+
 	var i, key, length, keys = Object.keys(json), output = '<div class="collapser"></div>{<span class="ellipsis"></span><ul class="obj collapsible">', hasContents = false;
 	for (i = 0, length = keys.length; i < length; i++) {
 		key = keys[i];
